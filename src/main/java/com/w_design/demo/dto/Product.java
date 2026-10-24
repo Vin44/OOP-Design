@@ -1,20 +1,51 @@
 package com.w_design.demo.dto;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-
+@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
+@JsonSubTypes({
+        @JsonSubTypes.Type(DigitalProduct.class),
+        @JsonSubTypes.Type(PhysicalProduct.class)
+})
 
 public class Product {
 
-    private Integer id;
+    private Long id;
     private String name;
     private double price;
 
+
+    public Product() {
+    }
+
+    public Product(Long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
